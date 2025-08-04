@@ -3,11 +3,18 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <style>
       .styletest{
+        padding-left: 1%;
         p {
         color:green;
+        font-family: 'Courier New';
+        font-size:large;
         }
         h1 {
-          color:blue;
+          color:rgb(57, 196, 29);
+          font-family:Impact;
+        }
+        h2{
+          color:rgb(39, 182, 110);
         }
       }
 
@@ -23,7 +30,14 @@
 
   <section class="styletest">
     <h1>This Section uses a completely different style class.</h1>
-    <p>Notice how text is colored, and the font is different.</p>
+    <h2>Notice how text is colored, and fonts are different.</h2>
+    <p>Wooo</p>
+
+    <h1 id="rainbowText">This text can change color!!!</h1>
+    <button id="rainbowButton">Click this to change the text's color.</button>
+    <br> <br>
+    <img src="owl cat.png" style="height: 50%;">
+    <img src="selfie.jpeg" style="height: 50%;">
   </section>
 
   <script>
@@ -46,6 +60,26 @@
       textid++;
       textid = textid % mod;
       displayText();
+    }
+  </script>
+
+  <script>
+    let colorIndex = 0;
+    const colors = new Array("green", "blue", "purple", "violet", "red", "orange", "yellow");
+    rainbowButton = document.getElementById("rainbowButton");
+    rainbowText = document.getElementById("rainbowText");
+
+    function setColor(){
+      rainbowText.style.color = colors[colorIndex];
+      rainbowButton.style.color = colors[colorIndex];
+    }
+
+    setColor();
+
+    rainbowButton.onclick = function changeColor(){
+      colorIndex++;
+      colorIndex = colorIndex % colors.length;
+      setColor();
     }
   </script>
 </body>
