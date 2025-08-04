@@ -1,15 +1,51 @@
 <body>
-  <li><a href="../index.html"> Back to Main Page </a> </li>
-  <h1>HI IM DANIEL.</h1>
-  <p>I like C++ but uhh javascript looks cool ig.</p>
-  <button id="ImExcited">Click this!</button>
+  <head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <style>
+      .styletest{
+        p {
+        color:green;
+        }
+        h1 {
+          color:blue;
+        }
+      }
+
+    </style>
+  </head>
+
+  <button><a href=../index.html>Back to Main Page</a></button>
+  <section class= "w3-container">
+    <h1>HI IM DANIEL.</h1>
+    <p id = "parText">text</p>
+    <button id = "ImExcited">Click this to change the text</button>
+  </section>
+
+  <section class="styletest">
+    <h1>This Section uses a completely different style class.</h1>
+    <p>Notice how text is colored, and the font is different.</p>
+  </section>
 
   <script>
-    // Get references to the button and the message
-    button = document.getElementById('ImExcited');
-  
-    button.onclick = function name(){
-      document.write("<p>I am excited for CS3!!!</p>");
+    let textid = 0;
+    const possibleText = [];
+    possibleText.push("JS seems kinda similar to C++ with its syntax");
+    possibleText.push("And it's quite fun to see everything displayed on a webpage");
+    possibleText.push("But of course, I still have to learn some stuff by myself.");
+    possibleText.push("This text has an index of 3, which means it's the fourth text that shows up.");
+
+    let mod = possibleText.length;
+
+    function displayText(){
+      document.getElementById("parText").textContent = textid + 1 + ". " + possibleText[textid];
+    }
+
+    displayText();
+
+    document.getElementById('ImExcited').onclick = function name(){
+      textid++;
+      textid = textid % mod;
+      displayText();
     }
   </script>
 </body>
