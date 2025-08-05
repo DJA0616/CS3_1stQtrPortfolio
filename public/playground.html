@@ -27,9 +27,16 @@
             text-shadow:1px 1px 4px #00000022;
         }
 
+        @keyframes rainbow-cycle{
+            0% {background-color: #007bff;}
+            33% {background-color: #9e36ff;}
+            66% {background-color: #eb14ff;}
+            100% {background-color: #007bff;}
+        }
+
         button{
-            background-image:linear-gradient(to bottom, #007bff00, #7ac3ff00);
-            background-color: #007bff;
+            animation: rainbow-cycle 5s infinite linear;
+            background-image:linear-gradient(to bottom, #007bff00, #ffffff6e);
             color: white;
             padding: 14px 20px;
             border: none;
@@ -42,7 +49,6 @@
         }
 
         button:hover{
-            background-image:linear-gradient(to bottom, #007bff, #7ac3ff);
             padding: 18px 24px;
             transition: all 0.1s ease;
         }
