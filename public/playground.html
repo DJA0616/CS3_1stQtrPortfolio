@@ -1,26 +1,66 @@
 <body>
     <style>
         .style1{
-            color:black;
+            color:rgb(255, 255, 255);
             font-family: 'Segoe UI';
-            padding-left: 1%;
-            padding-right: 1%;
+            h1{
+                font-size: xxx-large;
+            }
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-shadow:2px 2px 4px rgba(0, 0, 0, 0.486);
+            background-image: linear-gradient(to bottom, #bf50ff, #7ac3ff);
+            border-radius: 15px;
+            text-align: center;
         }
 
         .style2{
-            color:black;
-            font-family: 'Times New Roman';
-            padding-left: 3%;
-            padding-right: 3%;
-            line-height: 50%;
+            background-image:linear-gradient(to left, #aa18ff 30%, #269dff 70%);
+            background-clip: text;
+            color:#ffffff00;
+            font-family:'Arial';
+            text-align: center;
+            line-height: normal;
+            font-size:x-large;
+            text-shadow:1px 1px 4px #00000022;
+        }
+
+        button{
+            background-image:linear-gradient(to bottom, #007bff00, #7ac3ff00);
+            background-color: #007bff;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 32px;
+            font-size: 16px;
+            font-family:'Segoe UI';
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.486);
+            cursor: pointer;
+            transition: all 0.1s ease;
+        }
+
+        button:hover{
+            background-image:linear-gradient(to bottom, #007bff, #7ac3ff);
+            padding: 18px 24px;
+            transition: all 0.1s ease;
+        }
+
+        body{
+            background-color: azure;
+            background-image: linear-gradient(to bottom, #ffffff00,#ffffff00,#ffffff18,#c300ff5b);
         }
     </style>
+
     <header class="style1">
         <h1>This is just an experiment to get me used to classes and styles.</h1>
     </header>
 
     <section class="style2">
-        <h3>This is a different class of style</h3>
-        <p>baka....</p>
+        <br>
+        <h1>This is a different class of style.</h1>
+        <button>Click Me!</button>
     </section>
+
 </body>
