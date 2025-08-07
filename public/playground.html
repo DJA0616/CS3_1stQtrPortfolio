@@ -106,7 +106,7 @@
             <input id="answerInput" type="number" class="elemEnt StylE3"></input>
         </div>
         <br><br>
-        <button onclick="window.location.href='..index.html';" class="button1">Back</button>
+        <button onclick="window.location.href='../index.html';" class="button1">Back</button>
     </section>
 </body>
 
@@ -125,6 +125,10 @@
     }); 
 
     function checkAnswer(input){
-
+        if(input == 5){
+            document.write("Correct");
+        }else{
+            document.write("Wrong");
+        }
     }
 </script>
