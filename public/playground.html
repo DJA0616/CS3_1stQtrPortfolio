@@ -100,35 +100,32 @@
 
     <section class="style2">
         <br>
-        <h1>Write your notes here.</h1>
+        <h1>Write your answers here.</h1>
         <br>
         <div class="gradient-outline">
-            <div contenteditable="true" class="element style3" id="nameInput"></div>
+            <input id="answerInput" type="number" class="elemEnt StylE3"></input>
         </div>
-        <button id="submitButton">Submit</button>
         <br><br>
-        <button onclick="window.location.href='../index.html';" class="button1">Back</button>
+        <button onclick="window.location.href='..index.html';" class="button1">Back</button>
     </section>
 </body>
 
 <script>
-    submitButton = document.getElementById("submitButton");
-    nameInput = document.getElementById("nameInput");
+    const answerInput = document.getElementById("answerInput");
 
-    submitButton.onclick = function submit(){
-        if(nameInput.textContent.trim().length > 0){
-            let name = document.createElement('div');
-            name.textContent = nameInput.textContent;
-            document.body.appendChild(name);
-
-            let editButton = document.createElement('button');
-            document.body.appendChild(editButton);
-            editButton.onclick = function editText(){
-                name.contentEditable = true;
+    //code to submit answer
+    answerInput.addEventListener('keydown', function submit(ev){
+        if(ev.key === 'Enter'){
+            ev.preventDefault();
+            if(answerInput.value.trim().length > 0){
+                checkAnswer(answerInput.value);
             }
-
-            nameInput.textContent = "";
-            }
+            answerInput.value = "";
         }
-        //hi
+    }); 
+
+    function checkAnswer(input){
+
+    }
+    
 </script>
