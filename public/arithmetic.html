@@ -72,9 +72,7 @@
             padding: 2px;
             border-radius: 15px;
             outline:none;
-            text-decoration: none;
             display:inline-block;
-            margin:auto;
         }
 
         .element {
@@ -94,16 +92,17 @@
         }
     </style>
 
-    <header class="style1">
-        <h1>I'm gonna copy Juan and make a note-taking page</h1>
+    <header class="style1">    
+        <h1 id="message"></h1>
     </header>
+
 
     <section class="style2">
         <br>
         <h1>Write your answers here.</h1>
         <br>
-        <div class="gradient-outline">
-            <input id="answerInput" type="number" class="elemEnt StylE3"></input>
+        <div class="gradient-outline" id="box">
+            <input id="answerInput" type="number" class="element style3"></input>
         </div>
         <br><br>
         <button onclick="window.location.href='../index.html';" class="button1">Back</button>
@@ -111,7 +110,39 @@
 </body>
 
 <script>
+    const message = document.getElementById("message");
     const answerInput = document.getElementById("answerInput");
+    const box = document.getElementById("box");
+    let problem = "";
+    let answer;
+
+    function generateProblem(){
+        let a = Math.floor(Math.random() * 10), b = Math.floor(Math.random() * 10);
+        //all other cases are okay...
+        switch(Math.floor(Math.random() * 4)){
+            case 0:
+                answer = a + b;
+                problem = a + " + " + b;
+                break;
+            case 1:
+                answer = a - b;
+                problem = a + " - " + b;
+                break;
+            case 2:
+                answer = a * b;
+                problem = a + " x " + b;
+                break;
+            case 3:
+                b = Math.floor(Math.random() * 10) + 1; //avoid zero
+                answer = (Math.floor(Math.random() * 10) + 1) * b; //get the answer first
+                a = answer * b;
+                problem = a + " ÷ " + b;
+                break;
+        }
+    }
+
+    generateProblem();
+    message.textContent = "What is " + problem;
 
     //code to submit answer
     answerInput.addEventListener('keydown', function submit(ev){
@@ -124,11 +155,24 @@
         }
     }); 
 
+    function shake(element) {
+    let i = 0;
+    var interval = setInterval(function() {
+        element.style.transform = "translate(" + ((Math.random() - 0.5) * 10) + "px, " + ((Math.random() - 0.5) * 10) + "px)";
+        i++;
+        if (i > 5) {
+            clearInterval(interval);
+            element.style.transform = ""; // reset
+        }
+    }, 50);
+}
+
     function checkAnswer(input){
-        if(input == 5){
-            document.write("Correct");
+        if(input == answer){
+            generateProblem();
+            message.textContent = "What is " + problem;
         }else{
-            document.write("Wrong");
+            shake(box);
         }
     }
 </script>
