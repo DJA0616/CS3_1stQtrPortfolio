@@ -67,6 +67,24 @@
             text-align: center;
         }
 
+        @keyframes outlineRed{
+            0% {background: linear-gradient(to left, #aa18ff 30%, #269dff 70%);}
+            100% {background: linear-gradient(to left, #ff4949 30%, #ff4949 70%);}
+        }
+
+        @keyframes innerBoxRed{
+            0%   { box-shadow: 0 0 10px rgba(255, 73, 73, 0); }
+            100%   { box-shadow: 0 0 10px rgb(255, 7, 7); }
+        }
+
+        .outlineRed{
+            animation: outlineRed 0.3s forwards linear;
+        }
+
+        .innerBoxRed{
+            animation: innerBoxRed 0.3s forwards linear;
+        }
+
         .gradient-outline {
             background: linear-gradient(to left, #aa18ff 30%, #269dff 70%);
             padding: 2px;
@@ -75,8 +93,7 @@
             display:inline-block;
         }
 
-        .element {
-            background: linear-gradient(to left, #fff1fb, #e0f1ff);
+        .element {  
             border-radius: 13px;
             border: none;
             padding: 10px 20px;
@@ -90,6 +107,7 @@
             width: auto;
             min-width: 200px;
         }
+
     </style>
 
     <header class="style1">    
@@ -99,10 +117,10 @@
 
     <section class="style2">
         <br>
-        <h1>Write your answers here.</h1>
+        <h1 id="scoreDisplay"></h1>
         <br>
         <div class="gradient-outline" id="box">
-            <input id="answerInput" type="number" class="element style3"></input>
+            <input id="answerInput" type="number" class="element style3" ></input>
         </div>
         <br><br>
         <button onclick="window.location.href='../index.html';" class="button1">Back</button>
@@ -112,9 +130,11 @@
 <script>
     const message = document.getElementById("message");
     const answerInput = document.getElementById("answerInput");
+    const scoreDisplay = document.getElementById("scoreDisplay");
     const box = document.getElementById("box");
     let problem = "";
     let answer;
+    let score = 0;
 
     function generateProblem(){
         let a = Math.floor(Math.random() * 10), b = Math.floor(Math.random() * 10);
@@ -140,9 +160,13 @@
                 break;
         }
     }
+    function displayScore(){
+        scoreDisplay.textContent = "Score: " + score;
+    }
 
     generateProblem();
     message.textContent = "What is " + problem;
+    displayScore();
 
     //code to submit answer
     answerInput.addEventListener('keydown', function submit(ev){
@@ -169,10 +193,17 @@
 
     function checkAnswer(input){
         if(input == answer){
+            score++;
+            displayScore();
             generateProblem();
             message.textContent = "What is " + problem;
         }else{
             shake(box);
+            answerInput.classList.add("innerBoxRed");
+            box.classList.add("outlineRed");
+
+            setTimeout(function() {answerInput.classList.remove("innerBoxRed")}, 600);
+            setTimeout(function() {box.classList.remove("outlineRed")}, 600);
         }
     }
 </script>
