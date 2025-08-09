@@ -118,6 +118,7 @@
     <section class="style2">
         <br>
         <h1 id="scoreDisplay"></h1>
+        <h1 id="streakDisplay"></h1>
         <br>
         <div class="gradient-outline" id="box">
             <input id="answerInput" type="number" class="element style3" ></input>
@@ -131,10 +132,39 @@
     const message = document.getElementById("message");
     const answerInput = document.getElementById("answerInput");
     const scoreDisplay = document.getElementById("scoreDisplay");
+    const streakDisplay = document.getElementById("streakDisplay");
     const box = document.getElementById("box");
     let problem = "";
     let answer;
     let score = 0;
+    let streak = 0;
+    let highScore = loadHighScore();
+    let highStreak = loadHighStreak();
+
+    function loadHighScore() {
+        // Get the value from localStorage and convert it to a number
+        let saved = localStorage.getItem("highScore");
+        return saved ? Number(saved) : 0;
+    }
+
+    function loadHighStreak() {
+        let saved = localStorage.getItem("highStreak");
+        return saved ? Number(saved) : 0;
+    }
+
+    function saveHighScore(newScore) {
+        if (newScore > loadHighScore()) {
+            localStorage.setItem("highScore", newScore);
+            highScore = newScore;
+        }
+    }
+
+    function saveHighStreak(newStreak) {
+        if (newStreak > loadHighStreak()) {
+            localStorage.setItem("highStreak", newStreak);
+            highStreak = newStreak;
+        }
+    }
 
     function generateProblem(){
         let a = Math.floor(Math.random() * 10), b = Math.floor(Math.random() * 10);
@@ -161,7 +191,8 @@
         }
     }
     function displayScore(){
-        scoreDisplay.textContent = "Score: " + score;
+        scoreDisplay.textContent = "Score: " + score + " | Highest Score: " + highScore;
+        streakDisplay.textContent = "Streak: " + streak + " | Highest Streak: " + highStreak;
     }
 
     generateProblem();
@@ -194,10 +225,14 @@
     function checkAnswer(input){
         if(input == answer){
             score++;
+            streak++;
+            saveHighScore(score);
+            saveHighStreak(streak);
             displayScore();
             generateProblem();
             message.textContent = "What is " + problem;
         }else{
+            streak = 0;
             shake(box);
             answerInput.classList.add("innerBoxRed");
             box.classList.add("outlineRed");
