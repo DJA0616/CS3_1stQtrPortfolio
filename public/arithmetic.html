@@ -1,0 +1,244 @@
+<body>
+    <style>
+        .style1{
+            color:rgb(255, 255, 255);
+            font-family: 'Segoe UI';
+            h1{
+                font-size: xxx-large;
+            }
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-shadow:2px 2px 4px rgba(0, 0, 0, 0.486);
+            background-image: linear-gradient(to bottom, #bf50ff, #7ac3ff);
+            border-radius: 30px;
+            text-align: center;
+        }
+
+        .style2{
+            background-image:linear-gradient(to left, #aa18ff 30%, #269dff 70%);
+            background-clip: text;
+            color:#ffffff00;
+            font-family:'Arial';
+            text-align: center;
+            line-height: normal;
+            font-size:x-large;
+            text-shadow:0px 0px 8px #00000044;
+        }
+
+        @keyframes rainbow{
+            0% {background-color: #007bff;}
+            100% {background-color: #aa18ff;}
+        }
+
+        .button1{
+            background-image:linear-gradient(to bottom, #007bff00, #7ac3ff00);
+            animation: rainbow 5s linear infinite alternate;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 32px;
+            font-size: 16px;
+            font-family:'Segoe UI';
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.486);
+            cursor: pointer;
+            transition: all 0.5s ease;
+            rotate: 0deg;
+        }
+
+        .button1:hover{
+            background-image:linear-gradient(to bottom, #007bff00, #ffffffaa);
+            padding: 18px 24px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        body{
+            background-color: azure;
+            background-image: linear-gradient(to bottom, #ffffff00,#ffffff00,#ffffff18,#c300ff5b);
+        }
+
+        .style3{
+            color:#007bff;
+            
+            padding: 10px 50px;
+            border-radius: 30px;
+            text-align: center;
+        }
+
+        @keyframes outlineRed{
+            0% {background: linear-gradient(to left, #aa18ff 30%, #269dff 70%);}
+            100% {background: linear-gradient(to left, #ff4949 30%, #ff4949 70%);}
+        }
+
+        @keyframes innerBoxRed{
+            0%   { box-shadow: 0 0 10px rgba(255, 73, 73, 0); }
+            100%   { box-shadow: 0 0 10px rgb(255, 7, 7); }
+        }
+
+        .outlineRed{
+            animation: outlineRed 0.3s forwards linear;
+        }
+
+        .innerBoxRed{
+            animation: innerBoxRed 0.3s forwards linear;
+        }
+
+        .gradient-outline {
+            background: linear-gradient(to left, #aa18ff 30%, #269dff 70%);
+            padding: 2px;
+            border-radius: 15px;
+            outline:none;
+            display:inline-block;
+        }
+
+        .element {  
+            border-radius: 13px;
+            border: none;
+            padding: 10px 20px;
+            font-size: 2.5rem;
+            font-family: 'Calibri', sans-serif;
+            text-align: center;
+            margin: auto;
+            cursor: text;
+            outline: none;
+            caret-color: #269dff;
+            width: auto;
+            min-width: 200px;
+        }
+
+    </style>
+
+    <header class="style1">    
+        <h1 id="message"></h1>
+    </header>
+
+
+    <section class="style2">
+        <br>
+        <h1 id="scoreDisplay"></h1>
+        <h1 id="streakDisplay"></h1>
+        <br>
+        <div class="gradient-outline" id="box">
+            <input id="answerInput" type="number" class="element style3" ></input>
+        </div>
+        <br><br>
+        <button onclick="window.location.href='../index.html';" class="button1">Back</button>
+    </section>
+</body>
+
+<script>
+    const message = document.getElementById("message");
+    const answerInput = document.getElementById("answerInput");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const streakDisplay = document.getElementById("streakDisplay");
+    const box = document.getElementById("box");
+    let problem = "";
+    let answer;
+    let score = 0;
+    let streak = 0;
+    let highScore = loadHighScore();
+    let highStreak = loadHighStreak();
+
+    function loadHighScore() {
+        // Get the value from localStorage and convert it to a number
+        let saved = localStorage.getItem("highScore");
+        return saved ? Number(saved) : 0;
+    }
+
+    function loadHighStreak() {
+        let saved = localStorage.getItem("highStreak");
+        return saved ? Number(saved) : 0;
+    }
+
+    function saveHighScore(newScore) {
+        if (newScore > loadHighScore()) {
+            localStorage.setItem("highScore", newScore);
+            highScore = newScore;
+        }
+    }
+
+    function saveHighStreak(newStreak) {
+        if (newStreak > loadHighStreak()) {
+            localStorage.setItem("highStreak", newStreak);
+            highStreak = newStreak;
+        }
+    }
+
+    function generateProblem(){
+        let a = Math.floor(Math.random() * 10), b = Math.floor(Math.random() * 10);
+        //all other cases are okay...
+        switch(Math.floor(Math.random() * 4)){
+            case 0:
+                answer = a + b;
+                problem = a + " + " + b;
+                break;
+            case 1:
+                answer = a - b;
+                problem = a + " - " + b;
+                break;
+            case 2:
+                answer = a * b;
+                problem = a + " x " + b;
+                break;
+            case 3:
+                b = Math.floor(Math.random() * 10) + 1; //avoid zero
+                answer = (Math.floor(Math.random() * 10) + 1) * b; //get the answer first
+                a = answer * b;
+                problem = a + " ÷ " + b;
+                break;
+        }
+    }
+    function displayScore(){
+        scoreDisplay.textContent = "Score: " + score + " | Highest Score: " + highScore;
+        streakDisplay.textContent = "Streak: " + streak + " | Highest Streak: " + highStreak;
+    }
+
+    generateProblem();
+    message.textContent = "What is " + problem;
+    displayScore();
+
+    //code to submit answer
+    answerInput.addEventListener('keydown', function submit(ev){
+        if(ev.key === 'Enter'){
+            ev.preventDefault();
+            if(answerInput.value.trim().length > 0){
+                checkAnswer(answerInput.value);
+            }
+            answerInput.value = "";
+        }
+    }); 
+
+    function shake(element) {
+    let i = 0;
+    var interval = setInterval(function() {
+        element.style.transform = "translate(" + ((Math.random() - 0.5) * 10) + "px, " + ((Math.random() - 0.5) * 10) + "px)";
+        i++;
+        if (i > 5) {
+            clearInterval(interval);
+            element.style.transform = ""; // reset
+        }
+    }, 50);
+}
+
+    function checkAnswer(input){
+        if(input == answer){
+            score++;
+            streak++;
+            saveHighScore(score);
+            saveHighStreak(streak);
+            displayScore();
+            generateProblem();
+            message.textContent = "What is " + problem;
+        }else{
+            streak = 0;
+            shake(box);
+            answerInput.classList.add("innerBoxRed");
+            box.classList.add("outlineRed");
+
+            setTimeout(function() {answerInput.classList.remove("innerBoxRed")}, 600);
+            setTimeout(function() {box.classList.remove("outlineRed")}, 600);
+        }
+    }
+</script>
