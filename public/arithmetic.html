@@ -1,4 +1,8 @@
 <body>
+    <head>
+        <title>Arithmetic Game</title>
+        <link rel="icon" href="images/icon/favicon.ico" type="image/x-icon">
+    </head>
     <style>
         .style1{
             color:rgb(255, 255, 255);
@@ -213,7 +217,8 @@
     function shake(element) {
     let i = 0;
     var interval = setInterval(function() {
-        element.style.transform = "translate(" + ((Math.random() - 0.5) * 10) + "px, " + ((Math.random() - 0.5) * 10) + "px)";
+        let shakeSize = (20 - 4 * i)
+        element.style.transform = "translate(" + ((Math.random() - 0.5) * shakeSize) + "px, " + ((Math.random() - 0.5) * shakeSize) + "px)";
         i++;
         if (i > 5) {
             clearInterval(interval);
@@ -224,6 +229,7 @@
 
     function checkAnswer(input){
         if(input == answer){
+            console.log("Correct");
             score++;
             streak++;
             saveHighScore(score);
@@ -232,6 +238,7 @@
             generateProblem();
             message.textContent = "What is " + problem;
         }else{
+            console.log("Wrong");
             streak = 0;
             shake(box);
             answerInput.classList.add("innerBoxRed");
