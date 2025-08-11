@@ -15,16 +15,17 @@
     <br>
 
     <div id="out1" style="background-color:blue; color:white; display:inline">
-        Here's a list of my friends:
     </div>
+
+    
+    <script>
+        function addFriends(event){
+            let output = document.getElementById("out1");
+            let input1 = document.getElementById("in1");
+            let input2 = document.getElementById("in2");
+            output.innerHTML += "<p>Name: " + input1.value + ", Age: " + input2.value + "</p>";
+        }
+    </script>
 </body>
 
-<script>
-    function addFriends(){
-        let output = document.getElementById("out1");
-        let input1 = document.getElementById("in1");
-        let input2 = document.getElementById("in2");
-        output.innerHTML += "<div>Name: " + input1.value + ", Age: " + input2.value + "</div>";
-    }
-</script>
 </html>
