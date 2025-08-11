@@ -8,5 +8,23 @@
 <body>
     <h1>Daniel Asis - Na04 - August 11, 2025</h1>
     <h2>Second Graded Exercise - First Quarter</h2>
+    <p>Here's a list of my friends</p>
+    <input id="in1" placeholder="Write your name here"> <br>
+    <input id="in2" placeholder="Write your age here">
+    <button onclick="addFriends()">Add Friends</button>
+    <br>
+
+    <div id="out1" style="background-color:blue; color:white; display:inline">
+        Here's a list of my friends:
+    </div>
 </body>
+
+<script>
+    function addFriends(){
+        let output = document.getElementById("out1");
+        let input1 = document.getElementById("in1");
+        let input2 = document.getElementById("in2");
+        output.innerHTML += "<div>Name: " + input1.value + ", Age: " + input2.value + "</div>";
+    }
+</script>
 </html>
