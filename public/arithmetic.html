@@ -211,16 +211,22 @@
     }); 
 
     function shake(element) {
-    let i = 0;
-    var interval = setInterval(function() {
-        element.style.transform = "translate(" + ((Math.random() - 0.5) * 10) + "px, " + ((Math.random() - 0.5) * 10) + "px)";
+        element.style.transition = "transform 0.025s ease";
+
+        var i = 0;
+        var iteration = setInterval(function() {
+        let x = (Math.random() - 0.5) * 10;
+        let y = (Math.random() - 0.5) * 10;
+
+        element.style.transform = "translate(" + x + "px, " + y + "px)";
+        
         i++;
         if (i > 5) {
-            clearInterval(interval);
-            element.style.transform = ""; // reset
+            clearInterval(iteration);
+            element.style.transform = "";
         }
-    }, 50);
-}
+        }, 50);
+    }
 
     function checkAnswer(input){
         if(input == answer){
@@ -237,8 +243,8 @@
             answerInput.classList.add("innerBoxRed");
             box.classList.add("outlineRed");
 
-            setTimeout(function() {answerInput.classList.remove("innerBoxRed")}, 600);
-            setTimeout(function() {box.classList.remove("outlineRed")}, 600);
+            setTimeout(function() {answerInput.classList.remove("innerBoxRed")}, 300);
+            setTimeout(function() {box.classList.remove("outlineRed")}, 300);
         }
     }
 </script>
