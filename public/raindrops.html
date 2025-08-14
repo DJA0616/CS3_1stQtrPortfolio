@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Raindrops</title>
     <style>
-        html, body{
+        html, body {
             margin: 0;
             padding: 0;
             overflow: hidden;
@@ -17,6 +17,7 @@
             background-color: aqua;
             border-radius: 50%;
             position: absolute;
+            will-change: transform; /* hint for performance */
         }
     </style>
 </head>
@@ -26,38 +27,45 @@
 
         function generateDrops(intervalTime, count) {
             let i = 0;
-            const dropInterval = setInterval(() => {
+            setInterval(() => {
+                if (i >= count) return;
+
                 const drop = document.createElement("div");
                 drop.classList.add("circle");
-                drop.style.left = Math.random() * window.innerWidth + "px";
-                drop.style.top = "0px";
+                drop.x = Math.random() * window.innerWidth;
+                drop.y = 0;
                 drop.yvelocity = Math.random() * 5 + 10;
-                drop.xvelocity=0;
+                drop.xvelocity = 0;
                 drops.push(drop);
                 document.body.appendChild(drop);
-
                 i++;
-                if (i >= count) {
-                    clearInterval(dropInterval);
-                }
             }, intervalTime);
         }
 
+        let lastTime = performance.now();
         function animateDrops(wind) {
-            setInterval(() => {
-                drops.forEach(drop => {
-                    drop.yvelocity += 0.5; // gravity effect
-                    drop.xvelocity += wind;
-                    let newTop = parseFloat(drop.style.top) + drop.yvelocity;
-                    let newLeft = parseFloat(drop.style.left) + drop.xvelocity
-                    drop.style.top = newTop + "px";
-                    drop.style.left = newLeft + "px";
+            function frame(now) {
+                const delta = (now - lastTime) / 16.67;
+                lastTime = now;
 
-                    if (newTop > window.innerHeight) {
+                drops.forEach((drop, index) => {
+                    drop.yvelocity += 0.5 * delta;
+                    drop.xvelocity += wind * delta;
+
+                    drop.y += drop.yvelocity * delta;
+                    drop.x += drop.xvelocity * delta;
+
+                    drop.style.transform = `translate(${drop.x}px, ${drop.y}px)`;
+
+                    if (drop.y > window.innerHeight) {
                         drop.remove();
+                        drops.splice(index, 1);
                     }
                 });
-            }, 30);
+
+                requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
         }
 
         animateDrops(0.05);
