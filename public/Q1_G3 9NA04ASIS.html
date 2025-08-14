@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1 Third Graded Activity</title>
+</head>
+<body>
+    <h1>Daniel Asis - Na04 - August 11, 2025</h1>
+    <h2>Third Graded Exercise - First Quarter</h2>
+    <h3>Guess the number</h3> <br>
+    <h3>The number is from 1 to 100</h3> <br>
+    <h3>Enter your guess: </h3>
+    <input type="number" id="guess" placeholder="Enter your guess"> <br>
+    <button onclick="checkIt()">Check it!</button>
+
+    <p id="output"></p>
+
+    
+    <script>
+        const guess = document.getElementById("guess");
+        const out = document.getElementById("output");
+
+        function checkIt(){
+            var dnumber = Math.random() * 100
+            dnumber = Math.round(dnumber);
+            var guessInt = parseInt(guess.value);
+
+            if(guessInt == dnumber){
+                out.textContent = "You are correct!";
+            } else if(guessInt < dnumber){
+                out.textContent = "Your guess is LOWER!";
+            } else {
+                out.textContent = "Your guess is HIGHER!";
+            }
+        }
+    </script>
+</body>
+
+</html>
