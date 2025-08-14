@@ -215,7 +215,6 @@
     }); 
 
     function shake(element) {
-<<<<<<< HEAD
         element.style.transition = "transform 0.025s ease";
 
         var i = 0;
@@ -225,12 +224,6 @@
 
         element.style.transform = "translate(" + x + "px, " + y + "px)";
         
-=======
-    let i = 0;
-    var interval = setInterval(function() {
-        let shakeSize = (20 - 4 * i)
-        element.style.transform = "translate(" + ((Math.random() - 0.5) * shakeSize) + "px, " + ((Math.random() - 0.5) * shakeSize) + "px)";
->>>>>>> bbb7d89129c520da6499bf8e9362420966cfc5f4
         i++;
         if (i > 5) {
             clearInterval(iteration);
