@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>Raindrops</title>
     <style>
+        html, body{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
         .circle {
             width: 10px;
             height: 10px;
@@ -24,24 +31,27 @@
                 drop.classList.add("circle");
                 drop.style.left = Math.random() * window.innerWidth + "px";
                 drop.style.top = "0px";
-                drop.velocity = 0;
+                drop.yvelocity = Math.random() * 5 + 10;
+                drop.xvelocity=0;
                 drops.push(drop);
                 document.body.appendChild(drop);
 
                 i++;
                 if (i >= count) {
                     clearInterval(dropInterval);
-                    animateDrops();
                 }
             }, intervalTime);
         }
 
-        function animateDrops() {
+        function animateDrops(wind) {
             setInterval(() => {
                 drops.forEach(drop => {
-                    drop.velocity += 0.5; // gravity effect
-                    let newTop = parseFloat(drop.style.top) + drop.velocity;
+                    drop.yvelocity += 0.5; // gravity effect
+                    drop.xvelocity += wind;
+                    let newTop = parseFloat(drop.style.top) + drop.yvelocity;
+                    let newLeft = parseFloat(drop.style.left) + drop.xvelocity
                     drop.style.top = newTop + "px";
+                    drop.style.left = newLeft + "px";
 
                     if (newTop > window.innerHeight) {
                         drop.remove();
@@ -50,7 +60,8 @@
             }, 30);
         }
 
-        generateDrops(50, 50);
+        animateDrops(0.05);
+        generateDrops(50, Infinity);
     </script>
 </body>
 </html>
