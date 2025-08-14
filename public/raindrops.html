@@ -43,16 +43,16 @@
 
         let lastTime = performance.now();
         function animateDrops(wind) {
-            function frame(now) {
-                const delta = (now - lastTime) / 16.67;
-                lastTime = now;
+            function frame(currentTime) {
+                const deltaTime = (currentTime - lastTime)/16.67;
+                lastTime = currentTime;
 
                 drops.forEach((drop, index) => {
-                    drop.yvelocity += 0.5 * delta;
-                    drop.xvelocity += wind * delta;
+                    drop.yvelocity += 0.2 * deltaTime;
+                    drop.xvelocity += wind * deltaTime;
 
-                    drop.y += drop.yvelocity * delta;
-                    drop.x += drop.xvelocity * delta;
+                    drop.y += drop.yvelocity * deltaTime;
+                    drop.x += drop.xvelocity * deltaTime;
 
                     drop.style.transform = `translate(${drop.x}px, ${drop.y}px)`;
 
@@ -68,7 +68,7 @@
         }
 
         animateDrops(0.05);
-        generateDrops(50, Infinity);
+        generateDrops(10, Infinity);
     </script>
 </body>
 </html>
