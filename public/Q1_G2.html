@@ -8,28 +8,30 @@
 <body>
     <h1>Daniel Asis - Na04 - August 11, 2025</h1>
     <h2>Second Graded Exercise - First Quarter</h2>
-    <p>Here's a list of my friends</p>
-    <input id="in1" placeholder="Write your name here"> <br>
-    <input type="number" id="in2" placeholder="Write your age here">
-   
-    <label for="addFriends">
-        Add Your Friends to this List
-        <button onclick="addFriends()" id="addFriends">Add Friends</button>
-    </label>
-    <br>
+    <input type="number" id="input1" placeholder="Meal Price">
+    <input type="number" id="input2" placeholder="Tip">
+    <input type="number" id="input3" placeholder="Service Charge%">
+    <button id="calculate" onclick="totalMeal()">Calculate Total</button>
 
-    <div id="out1">
-    </div>
-
+    <p id="output"></p>
     
-    <script>
-        function addFriends(event){
-            let output = document.getElementById("out1");
-            let input1 = document.getElementById("in1");
-            let input2 = document.getElementById("in2");
-            output.innerHTML += "<p>Name: " + input1.value + ", Age: " + input2.value + "</p>";
-        }
-    </script>
+<script>
+    const in1 = document.getElementById("input1");
+    const in2 = document.getElementById("input2");
+    const in3 = document.getElementById("input3");
+    const out = document.getElementById("output");
+
+    function totalMeal(){
+        var mealPrice = in1.value;
+        var tip = in3.value;
+        var serviceCharge = in3.value;
+        
+        var totalCost = mealPrice + tip + (serviceCharge / 100 * mealPrice);
+        totalCost = totalCost.toFixed(2);
+
+        out.textContent = "Total Meal Cost: " + totalCost;
+    }
+</script>
 </body>
 
 </html>

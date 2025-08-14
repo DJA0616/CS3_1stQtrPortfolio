@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1 Second Graded Activity</title>
+</head>
+<body>
+    <h1>Daniel Asis - Na04 - August 11, 2025</h1>
+    <h2>Second Graded Exercise - First Quarter</h2>
+    <p>Here's a list of my friends</p>
+    <input id="in1" placeholder="Write your name here"> <br>
+    <input type="number" id="in2" placeholder="Write your age here">
+   
+    <label for="addFriends">
+        Add Your Friends to this List
+        <button onclick="addFriends()" id="addFriends">Add Friends</button>
+    </label>
+    <br>
+
+    <div id="out1">
+    </div>
+
+    
+    <script>
+        function addFriends(event){
+            let output = document.getElementById("out1");
+            let input1 = document.getElementById("in1");
+            let input2 = document.getElementById("in2");
+            output.innerHTML += "<p>Name: " + input1.value + ", Age: " + input2.value + "</p>";
+        }
+    </script>
+</body>
+
+</html>
