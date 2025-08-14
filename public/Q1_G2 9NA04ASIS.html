@@ -13,7 +13,7 @@
     <input type="number" id="input3" placeholder="Service Charge%">
     <button id="calculate" onclick="totalMeal()">Calculate Total</button>
 
-    <p id="output"></p>
+    <div id="output"></div>
     
 <script>
     const in1 = document.getElementById("input1");
@@ -22,14 +22,14 @@
     const out = document.getElementById("output");
 
     function totalMeal(){
-        var mealPrice = in1.value;
-        var tip = in3.value;
-        var serviceCharge = in3.value;
+        var mealPrice = parseFloat(in1.value);
+        var tip = parseFloat(in2.value);
+        var serviceCharge = parseFloat(in3.value);
         
         var totalCost = mealPrice + tip + (serviceCharge / 100 * mealPrice);
         totalCost = totalCost.toFixed(2);
 
-        out.value = "Total Meal Cost: " + totalCost;
+        out.innerHTML = "<p>Total Meal Cost: " + totalCost + "</p>";
     }
 </script>
 </body>
