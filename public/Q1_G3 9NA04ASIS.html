@@ -22,7 +22,7 @@
         const out = document.getElementById("output");
 
         function checkIt(){
-            var dnumber = Math.random() * 100
+            var dnumber = Math.floor(Math.random() * 100) + 1;
             dnumber = Math.round(dnumber);
             var guessInt = parseInt(guess.value);
 
