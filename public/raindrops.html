@@ -10,10 +10,9 @@
             overflow: hidden;
             height: 100%;
             width: 100%;
+            background: #111; /* darker background so drops stand out */
         }
         .circle {
-            width: 10px;
-            height: 10px;
             background-color: aqua;
             border-radius: 50%;
             position: absolute;
@@ -24,19 +23,31 @@
     <script>
         const drops = [];
 
+        function spawnDrop(x, y, vx, vy, timesBounced, size){
+            const drop = document.createElement("div");
+            drop.classList.add("circle");
+            drop.size = size;
+            drop.style.width = size + "px";
+            drop.style.height = 2 * size + "px";
+            drop.x = x;
+            drop.y = y;
+            drop.yvelocity = vy;
+            drop.xvelocity = vx;
+            drop.timesBounced = timesBounced;
+            drops.push(drop);
+            document.body.appendChild(drop);
+        }
+
         function generateDrops(intervalTime, count) {
             let i = 0;
             setInterval(() => {
                 if (i >= count) return;
-
-                const drop = document.createElement("div");
-                drop.classList.add("circle");
-                drop.x = Math.random() * window.innerWidth;
-                drop.y = 0;
-                drop.yvelocity = Math.random() * 5 + 10;
-                drop.xvelocity = 0;
-                drops.push(drop);
-                document.body.appendChild(drop);
+                spawnDrop(Math.random() * window.innerWidth, 
+                0, 
+                0, 
+                Math.random() * 5 + 20, 
+                0, 
+                10);
                 i++;
             }, intervalTime);
         }
@@ -47,20 +58,37 @@
                 const deltaTime = (currentTime - lastTime)/16.67;
                 lastTime = currentTime;
 
-                drops.forEach((drop, index) => {
-                    drop.yvelocity += 0.2 * deltaTime;
+                // iterate backwards so splice won't skip items
+                for (let i = drops.length - 1; i >= 0; i--) {
+                    const drop = drops[i];
+
+                    drop.yvelocity += 2 * deltaTime; // gravity
                     drop.xvelocity += wind * deltaTime;
 
                     drop.y += drop.yvelocity * deltaTime;
                     drop.x += drop.xvelocity * deltaTime;
 
-                    drop.style.transform = `translate(${drop.x}px, ${drop.y}px)`;
+                    drop.style.transform = "translate(" + drop.x + "px, " + drop.y + "px)";
 
                     if (drop.y > window.innerHeight) {
+                        if(drop.timesBounced < 1){
+                            // spawn splash drops
+                            for(let j = 0; j < 3; j++){
+                                spawnDrop(
+                                    drop.x,
+                                    window.innerHeight,
+                                    drop.xvelocity * (Math.random() - 0.5) * 2,
+                                    drop.yvelocity * (Math.random() * -0.5),
+                                    drop.timesBounced + 1,
+                                    drop.size / Math.sqrt(3)
+                                );
+                            }
+                        }
+
                         drop.remove();
-                        drops.splice(index, 1);
+                        drops.splice(i, 1);
                     }
-                });
+                }
 
                 requestAnimationFrame(frame);
             }
