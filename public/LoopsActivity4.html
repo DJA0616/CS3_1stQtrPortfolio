@@ -1,0 +1,47 @@
+<h1>Guess My Word</h1>
+<p id="wordDisplay"></p>
+<input type="text" id="guessInput" maxlength="1">
+<button onclick="makeGuess()">Guess</button>
+<p id="message"></p>
+<div id="playAgainButton"></div>
+
+<script>
+    let secretWord = ["D", "e", "r", "a", "n", "g", "e", "d", "D", "a", "n", "i", "e", "l"];
+    let guessedWord = ["_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_", "_"];
+
+    document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+    document.getElementById("playAgainButton").innerHTML = "";
+
+    let lives = 5;
+
+    function makeGuess() {
+        let guess = document.getElementById("guessInput").value.toLowerCase();
+
+        if(lives < 1){
+            message = `Game Over! Play again?`;
+            document.getElementById("message").textContent = message;
+            document.getElementById("playAgainButton").innerHTML = `<button>Play Again?<\button>`;
+        }
+        
+        if(!guess){ return; }; //if value is empty, don't do anything
+
+        let correct = false;
+
+        for (let i = 0; i < secretWord.length; i++) {
+            if (secretWord[i].toLowerCase() == guess) {
+                guessedWord[i] = guess;
+                correct = true;
+            }
+        }
+
+        lives -= !correct; //remove one life when an incorrect guess occurs
+
+        document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+
+        let message = correct ? "✅ Correct!" : "❌ Try again.";
+        message += `, You have ${lives} lives left.`;
+        document.getElementById("message").textContent = message;
+
+        document.getElementById("guessInput").value = ""; //clear guess input
+    }
+</script>
