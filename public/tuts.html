@@ -1,0 +1,60 @@
+<body>
+    <div id="input" style="border-radius: 1px; border:solid; font-size:large"></div> <br>
+    <button id="seven" onclick="sdhfsdfadsg asdfughadsfghbasdfiojgbv">7</button>
+    <button id="eight">8</button>
+    <button id="nine">9</button>
+    <button id="delete">Del</button>
+    <button id="AC">AC</button> <br>
+    <button id="four" onclick="four()">4</button>
+    <button id="five" onclick="five()">5</button>
+    <button id="six" onclick="six()">6</button>
+    <button id="times">x</button>
+    <button id="divide">/</button> <br>
+    <button id="one" onclick="one()">1</button>
+    <button id="two" onclick="two()">2</button>
+    <button id="three" onclick="three()">3</button>
+    <button id="plus">+</button>
+    <button id="minus">-</button> <br>
+    <button id="zero">0</button>
+    <button id="point">.</button>
+    <button id="EXP">EXP</button>
+    <button id="Ans">Ans</button>
+    <button id="equals">=</button> <br>
+</body>
+
+<script>
+    const input = document.getElementById('input');
+    var buffer = '0';
+    update();
+
+    function update(){
+        input.textContent = parseFloat(buffer);
+    }
+
+    function one(){
+        buffer += '1';
+        update();
+    }
+
+    function two(){
+        buffer += '2';
+        update();
+    }
+
+    function three(){
+        buffer += '3';
+        update();
+    }
+
+    function four(){
+        buffer += '4';
+        update();
+    }
+</script>
+
+<!--
+7 8 9  Del AC
+4 5 6   x   /
+1 2 3   +   -
+0 . EXP Ans =
+-->
