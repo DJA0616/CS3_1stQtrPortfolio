@@ -22,7 +22,8 @@
     *  We didn't get enough time to touch on this (we skipped straight to the Graded Exercises), and I only understand it from a base perspective of "oh it's just a way to interact with the console etc etc", so it's still confusing to me, especially with the *require* statement.
 4. **Truthiness**
     * I get how truthiness works - values that are not explicitly *0*, *-0*, *NaN*, *null*, *""*, or other things that denote emptiness are regarded as "true" in a boolean sense, but it gets more complicated when combining it with things like strict equality/inequality operators or assignments and ternary operators.
-5. 
+5. **Separating yor scripts into different files**
+    * I know that this is super helpful for organization, and I did do it last year for my final CS project, but I just never really did it this quarter. Instead I opted to just place my Javascript code into script tags for my html projects, as I found it more convenient for everything to be in one place (since there's not a lot of code anyway).
 
 # Describe on what will be your plan of action in order to help yourself in understanding further the topics listed on the second items.
 * Most of my problems with the items listed in no. 2 can be solved with a little more practice. Maybe in the coming quarters, I can focus on implementing / using them in my projects. For example, I could try styling a graded exercise, or using truthy variables instead of just booleans.
